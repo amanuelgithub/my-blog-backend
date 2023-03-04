@@ -12,17 +12,13 @@ dotenv.config({ path: `./env/${process.env.NODE_ENV}.env` });
 // user repository instance
 const userRepository: Repository<User> = AppDataSource.getRepository(User);
 
-export async function signin(
-  req: Request,
-  res: Response
-): Promise<{ token: string }> {
+export async function signin(req: Request, res: Response) {
   let token: string;
-  const reqData = req.body;
-  const { username, email } = reqData;
+  const { username, email } = req.body;
 
   // check if user exists and throw not found exception
   const user = await findUserByEmail(email);
-  if (user) {
+  if (!user) {
     res.send(status[status.NOT_FOUND]);
   }
   // @ts-ignore
@@ -31,7 +27,7 @@ export async function signin(
 
   token = jwt.sign({ username, email }, jwtSecret, jwtSignOptions);
 
-  return { token };
+  res.send({ token });
 }
 
 export async function signup(req: Request, res: Response): Promise<void> {
@@ -44,7 +40,7 @@ export async function signup(req: Request, res: Response): Promise<void> {
   }
 
   // create user
-  bcrypt.hash();
+  // bcrypt.hash();
 
   return;
 }
