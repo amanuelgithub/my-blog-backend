@@ -28,10 +28,10 @@ export class Comment implements IComment {
 
   // parent-child or nested children relationships
   // one-to-many relationship to another comment
-  @OneToMany(() => Comment, (comment) => comment.parent)
+  @ManyToOne(() => Comment, (comment) => comment.parent)
   children: Comment[];
   // many-to-one relationship to another comment
-  @OneToMany(() => Comment, (comment) => comment.parent)
+  @OneToMany(() => Comment, (comment) => comment.children)
   parent: Comment;
 
   // other entity related properties

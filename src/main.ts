@@ -1,5 +1,6 @@
 import "reflect-metadata";
 import express from "express";
+import bodyParser from "body-parser";
 import * as dotenv from "dotenv";
 import routes from "./routes";
 
@@ -7,7 +8,8 @@ dotenv.config({ path: `./env/${process.env.NODE_ENV}.env` });
 
 // create and setup express app
 const app = express();
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/", routes);
 
