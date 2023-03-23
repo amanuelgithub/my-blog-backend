@@ -19,6 +19,6 @@ export class Tag implements ITag {
   description: string;
 
   // entity relationship
-  @ManyToMany(() => Blog, (blog) => blog.tags)
-  blogs: Blog[];
+  //   @ManyToMany(() => Blog, (blog) => blog.tags)
+  //   blogs: Blog[];
 }

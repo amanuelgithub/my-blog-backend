@@ -2,6 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import { validate } from "class-validator";
 import { plainToClass, Expose } from "class-transformer";
 
+/**
+ *
+ * @param dtoClass Is a DTO class that is used to validate incoming request's body.
+ * @returns (req: Request, res: Response, next: NextFunction) => void
+ */
 const ValidationMiddleware = (dtoClass: any) => {
   return function (req: Request, res: Response, next: NextFunction) {
     const output: any = plainToClass(dtoClass, req.body);

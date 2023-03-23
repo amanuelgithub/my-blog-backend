@@ -21,6 +21,7 @@ export interface IUser {
   password: string;
   profileImage: string;
   joiningDate: Date;
+  token: string;
 }
 
 @Entity()
@@ -37,7 +38,7 @@ export class User implements IUser {
   @Column({ unique: true })
   email: string;
 
-  @Column()
+  @Column({ select: false })
   password: string;
 
   @Column()
@@ -45,6 +46,9 @@ export class User implements IUser {
 
   @CreateDateColumn()
   joiningDate: Date;
+
+  @Column({ nullable: true, select: false })
+  token: string;
 
   // entity relationship
   @OneToMany(() => Blog, (blog) => blog.author)

@@ -2,6 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
@@ -45,10 +46,10 @@ export class Blog implements IBlog {
   @Column({ default: false })
   isPublished: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   views: number;
 
-  @Column()
+  @Column({ nullable: true })
   likes: number;
 
   @CreateDateColumn()
@@ -64,6 +65,7 @@ export class Blog implements IBlog {
   @OneToMany(() => Comment, (comment) => comment.blog)
   comments: Comment[];
 
-  @ManyToMany(() => Tag, (tag) => tag.blogs)
+  @ManyToMany(() => Tag, { eager: true })
+  @JoinTable()
   tags: Tag[];
 }
