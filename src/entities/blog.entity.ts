@@ -16,7 +16,7 @@ import { User } from "./user.entity";
 export interface IBlog {
   id: string;
   title: string;
-  content: string;
+  content: object;
   description: string;
   featuredImage: string;
   isPublished: boolean;
@@ -34,8 +34,9 @@ export class Blog implements IBlog {
   @Column({ unique: true })
   title: string;
 
-  @Column()
-  content: string;
+  // the content will be array of JSON objects
+  @Column("jsonb", { nullable: true })
+  content: object;
 
   @Column()
   description: string;

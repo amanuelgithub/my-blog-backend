@@ -15,7 +15,7 @@ router.get(
   (req: Request, res: Response) => UserService.findUsers(req, res)
 );
 router.post(
-  "/",
+  "/register",
   ValidationMiddleware(CreateUserDto),
   (req: Request, res: Response) => UserService.createUser(req, res)
 );

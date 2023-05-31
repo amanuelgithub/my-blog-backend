@@ -8,11 +8,14 @@ import * as BlogService from "../services/blog.service";
 
 const router = Router();
 
-router.post(
+router.get(
   "/",
   AuthenticationMiddleware,
   IsAdmin,
   (req: Request, res: Response) => BlogService.findBlogs(req, res)
+);
+router.get("/published", (req: Request, res: Response) =>
+  BlogService.findPublishedBlogs(req, res)
 );
 router.post(
   "/",

@@ -18,6 +18,7 @@ const AuthenticationMiddleware = async (
 
   try {
     // remove `Bearer` from the token string
+    console.log(`Token: ${token}`);
     token = token.split(" ")[1];
 
     if (token == null || !token) {
@@ -34,15 +35,15 @@ const AuthenticationMiddleware = async (
       where: { id: sub },
     });
     // check if the token is available in the database
-    if (!user?.token) {
-      return res.send(badRequestRes("Invalid Token"));
-    }
+    // if (!user?.token) {
+    //   return res.send(badRequestRes("Invalid Token!"));
+    // }
 
     // @ts-ignore
     req.user = verifiedJWTPayload;
     next();
   } catch (error: any) {
-    res.send(badRequestRes("Invalid Token"));
+    res.send(badRequestRes("Invalid Token!!"));
   }
 };
 

@@ -36,6 +36,22 @@ export async function findBlogs(req: Request, res: Response) {
   }
 }
 
+export async function findPublishedBlogs(req: Request, res: Response) {
+  try {
+    const publishedBlogs = await BlogRepository.find({
+      where: { isPublished: true },
+    });
+
+    if (!publishedBlogs) {
+      res.send(notFoundRes());
+    } else {
+      res.send(publishedBlogs);
+    }
+  } catch (err: any) {
+    res.send(internalServerErrorRes(err.message));
+  }
+}
+
 export async function publishBlog(req: Request, res: Response) {
   try {
     const blog = await BlogRepository.findOne({

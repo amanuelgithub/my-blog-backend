@@ -39,7 +39,15 @@ export async function signin(req: Request, res: Response) {
     user.token = token;
     await userRepository.save(user);
 
-    res.send({ token });
+    res.send({
+      id: user.id,
+      role: user.role,
+      username: user.username,
+      email: user.email,
+      profileImage: user.profileImage,
+      joiningDate: user.joiningDate,
+      token,
+    });
   }
 }
 

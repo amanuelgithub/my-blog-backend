@@ -6,8 +6,7 @@ export class CreateBlogDto {
   title: string;
 
   @IsNotEmpty()
-  @IsString()
-  content: string;
+  content: any;
 
   @IsNotEmpty()
   @IsString()
