@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString, IsBoolean } from "class-validator";
 
 export class CreateBlogDto {
   @IsNotEmpty()
@@ -14,4 +14,8 @@ export class CreateBlogDto {
 
   @IsNotEmpty()
   featuredImage: string;
+
+  @IsNotEmpty()
+  @IsBoolean()
+  isPublished: boolean;
 }

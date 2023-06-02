@@ -41,7 +41,7 @@ export class Blog implements IBlog {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ nullable: true })
   featuredImage: string;
 
   @Column({ default: false })
