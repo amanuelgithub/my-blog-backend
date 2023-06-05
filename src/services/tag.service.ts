@@ -33,6 +33,32 @@ export async function findTags(req: Request, res: Response) {
   res.send(successRes(tags));
 }
 
+export async function updateTag(req: Request, res: Response) {
+  const { id } = req.params;
+  const { name, description } = req.body;
+
+  const tag = await TagRepository.findOne({ where: { id } });
+  if (!tag) {
+    res.send(notFoundRes());
+  } else {
+    tag.name = name;
+    tag.description = description;
+
+    res.send(await TagRepository.save(tag));
+  }
+}
+
+export async function deleteTag(req: Request, res: Response) {
+  const { id } = req.params;
+
+  const tag = await TagRepository.delete(id);
+  if (tag.affected === 0) {
+    res.send(notFoundRes());
+  } else {
+    res.send(successRes());
+  }
+}
+
 export async function addTagToBlog(req: Request, res: Response) {
   const tag = await TagRepository.findOne({ where: { id: req.body.tagId } });
   const blog = await BlogRepository.findOne({ where: { id: req.body.blogId } });

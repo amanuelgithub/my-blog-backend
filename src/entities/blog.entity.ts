@@ -36,7 +36,7 @@ export class Blog implements IBlog {
 
   // the content will be array of JSON objects
   @Column("jsonb", { nullable: true })
-  content: object;
+  content: any[];
 
   @Column()
   description: string;
